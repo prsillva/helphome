@@ -1,0 +1,64 @@
+{% load static %}
+{% load pwa%} 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% progressive_web_app_meta%}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}">
+    <link rel="manifest" href="{% static  'manifest.json' %}">
+    <title>{% block title %}{{page_title}}{% endblock %}</title>
+    
+</head>
+
+<body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+      </script>
+
+    <header>
+        <section class="header-container">
+            
+        <div class="logo-area">
+                
+                    <a href="{% url 'home' %}" class="title"><img src="{% static 'assets/logo.png'%}" alt="Logotipo" class="logo"></a>
+               
+    
+        </div>
+        
+        <div class="auth">
+               
+                    {% if user.is_authenticated %}
+                        <p><span class="auth-item">Olá, {{ request.user.first_name }}</span>
+                            <span><a href="{% url 'profilesite'%}">Meu Perfil</a></span>
+                            <span><a href="{% url 'deslogar_usuario' %}">Sair</a></span></p>
+                    {%else%}
+                        <p><a href="{% url 'logar_usuario' %}">Entrar</a><a href="{% url 'cadastrar_usuario' %}">Cadastre-se</a></p>
+                    {% endif %}
+                
+        </div>
+
+    </section>
+</header>
+<div class="container">
+
+         {% if messages %}
+        {% for message in messages %}
+<div class="{{ message.tags }} ">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% block content %} {% endblock %}
+</div>
+</body>
+<script src="{% static 'js/cep.js' %}"></script>
+<script src="{% static 'js/uf_cd.js' %}"></script>
+<script src="{% static 'js/serviceworker.js' %}"></script>
+</html>

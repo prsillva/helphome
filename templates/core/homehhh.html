@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load account socialaccount %}
+
+{% block content %}
+
+<div class="container  w-50" style="margin-top:100px ;margin-bottom: 100px;">
+  <div class="container form-group col-md-12 mb-0">
+      <center><h3>Pesquisa por Profissionais</h3></center>
+      <br>
+<form action="{% url 'search_results' %}" method="get"  >
+  <div class="form-group w-100 mb-3">
+  <label for="uf">Estado:</label>
+<select  name="uf" id="uf" class="form-select" aria-label="Default select example">
+  <option selected>Estado...</option>
+</select>
+</div>
+<div class="form-group  w-100 mb-3">
+    <label>Cidade</label>
+<select name="cidade" id="cidade" class="form-select" aria-label="Default select example">
+  <option selected>Cidade...</option>
+</select>
+</div>
+<div class="form-group  w-100 mb-3">
+<label for="search" id="search">Procurar: </label>
+<input name="search" type="text" placeholder="Procurar..." class="form-control">
+</div>
+<div class="form-group  w-100 mb-4">
+  <br>
+<center><button type="submit" class="btn btn-lg btn btn-primary">Procurar</button></center>
+</div>
+</form>
+</div>
+</div>
+{% endblock content%}
